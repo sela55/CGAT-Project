@@ -2,10 +2,11 @@ import React,{Component} from 'react';
 import './App.css';
 import Highcharts, { chart } from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import Chart from './Chart/Chart';
-import './Chart/Chart.css';
-import Container from './Chart/Test/Container';
-import ChartTest from './Chart/Test/Charts';
+
+import styled from 'styled-components';
+import ChartTest from './Chart/Charts';
+import Grid from './Chart/grid';
+
 
 const options ={
  chart:{
@@ -277,7 +278,7 @@ const options ={
 
      const options7 ={
       chart: {
-        type: 'pie'
+        type: 'pie',
     },
     credits:{
         enabled:false,
@@ -334,7 +335,10 @@ const options ={
 
      const options8 = {
       chart: {
-        type: 'column'
+        type: 'column',
+        backgroundColor: 
+        'rgba(255,255,255)'
+    
     },
     credits:{
         enabled:false,
@@ -410,8 +414,10 @@ const options ={
                 fontFamily: 'Verdana, sans-serif'
             }
         }
-    }]
-     }
+    }],
+ 
+   
+}
    
 class App extends Component{
   
@@ -420,71 +426,12 @@ class App extends Component{
   }
   render(){
 
-    // const style={
-    //   float:'left',
-    //   height:"100%",
-    //   width:"100%",
-    //   cursor:'pointer'
-    // }
-    
-
     return (
      
     <div className="page">
-    
-    <Container id="container-1" className="page container">
-         <ChartTest id="chart-1" className="chartStyle"
-        Highcharts={null}
-        options={this.state.data}
-        >
-        </ChartTest> 
-      <ChartTest id="chart-2" className="chartStyle" 
-        Highcharts={null}
-        options={options5}
-        >
-        </ChartTest>
-    
-      <ChartTest id="chart-3" className="chartStyle"
-        Highcharts={null}
-        options={options2}
-        >
-        </ChartTest>
-      </Container>
-       <Container id="container-2" className="page container">
-         <ChartTest id="chart-4" className="chartStyle"
-        Highcharts={null}
-        options={options3}
-        >
-          </ChartTest>
+      <Grid id="container-2">
+      </Grid>
 
-          <ChartTest id="chart-5" className="chartStyle"
-        Highcharts={null}
-        options={options4}
-        >
-          </ChartTest>
-
-          <ChartTest id="chart-8" className="chartStyle"
-        Highcharts={null}
-        options={options8}
-        >
-          </ChartTest>
-
-        </Container>
-
-      <Container id="container-3" className="page container">
-      <ChartTest id="chart-6" className="chartStyle"
-        Highcharts={null}
-        options={options5}
-        >
-          </ChartTest>
-
-
-          <ChartTest id="chart-7" className="chartStyle"
-        Highcharts={null}
-        options={options7}
-        >
-          </ChartTest>
-        </Container>      
       </div>
      
     )
