@@ -4,5 +4,5 @@ import App from './components/App';
 import Statistics from './components/Statistics/Statistics';
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Statistics />, document.getElementById('root'));
 

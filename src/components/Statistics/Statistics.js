@@ -1,46 +1,47 @@
 import React from 'react';
-import './Statistics.css';
 import MaterialTable from 'material-table';
+import './Statistics.css';
+import { API_DATA } from './api';
 
 class Statistics extends React.Component {
-  columns = [
-    { title: 'Name', field: 'name' },
-    { title: 'Surname', field: 'surname' },
-    { title: 'Operation', field: 'operation' },
-    { title: 'Date', field: 'date' },
-    { title: 'Birth', field: 'birthYear', type: 'numeric' },
-    {
-      title: 'Gender',
-      field: 'gender',
-      lookup: { 0: 'male', 1: 'female' },
-    },
-  ];
-  data = [
-    {
-      name: 'Stav',
-      surname: 'Elmashally',
-      operation: 'Login',
-      date: new Date().toUTCString(),
-      birthYear: 1992,
-      gender: 0,
-    },
-    {
-      name: 'Sara',
-      surname: 'Levi',
-      operation: 'Delete Graph',
-      date: new Date().toUTCString(),
-      birthYear: 1996,
-      gender: 1,
-    },
-  ];
+  state = { data: [], isLoading: true, selectedRow: null };
+
+  componentDidMount() {
+    // Will be an api call
+    setTimeout(() => {
+      this.setState({ data: API_DATA.data, isLoading: false });
+    }, 1000);
+  }
+
   render() {
     return (
-      <div style={{ maxWidth: '100%' }}>
+      <div className="ui container">
         <MaterialTable
-          columns={this.columns}
-          data={this.data}
-          options={{ search: true }}
-          title="History"
+          title="היסטוריית פעילות"
+          columns={[
+            { title: 'שם משתמש', field: 'userName' },
+            { title: 'הרשאות', field: 'permissions' },
+            { title: 'פעולה שביצע', field: 'operation' },
+            { title: 'ארגון', field: 'organization' },
+            { title: 'תפקיד', field: 'role' },
+            { title: 'תאריך', field: 'date' },
+          ]}
+          data={this.state.data}
+          onRowClick={(event, row) =>
+            this.setState({ selectedRow: row.tableData.id })
+          }
+          options={{
+            search: true,
+            actionsColumnIndex: -1,
+            headerStyle: { color: '#000', fontSize: '16px', fontWeight: 'bold' },
+            rowStyle: (rowData) => ({
+              backgroundColor:
+                this.state.selectedRow === rowData.tableData.id
+                  ? '#EEE'
+                  : '#FFF',
+            }),
+          }}
+          isLoading={this.state.isLoading}
         />
       </div>
     );
