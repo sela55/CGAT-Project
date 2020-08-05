@@ -24,5 +24,21 @@ export const API_DATA = {
       role: 'חייל',
       date: new Date().toUTCString(),
     },
+    {
+      userName: 'דוד כהן',
+      permissions: 'משתמש רגיל',
+      operation: 'התחברות למערכת',
+      organization: 'צפון',
+      role: 'חייל',
+      date: new Date().toUTCString(),
+    },
+    {
+      userName: 'אבי אברהם',
+      permissions: 'משתמש רגיל',
+      operation: 'יצירת גרף',
+      organization: 'צפון',
+      role: 'חייל',
+      date: new Date().toUTCString(),
+    },
   ],
 };
