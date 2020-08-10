@@ -1,46 +1,52 @@
 import React from 'react';
-import './Statistics.css';
 import MaterialTable from 'material-table';
+import './Statistics.css';
+import { API_DATA } from './api';
+
+const tableConfig = {
+  columns: [
+    { title: 'שם משתמש', field: 'userName' },
+    { title: 'הרשאות', field: 'permissions' },
+    { title: 'פעולה שביצע', field: 'operation' },
+    { title: 'ארגון', field: 'organization' },
+    { title: 'תפקיד', field: 'role' },
+    { title: 'תאריך', field: 'date' },
+  ],
+  tableOptions: {
+    search: true,
+    actionsColumnIndex: -1,
+    headerStyle: {
+      color: '#000',
+      fontSize: '16px',
+      fontWeight: 'bold',
+    },
+  },
+};
 
 class Statistics extends React.Component {
-  columns = [
-    { title: 'Name', field: 'name' },
-    { title: 'Surname', field: 'surname' },
-    { title: 'Operation', field: 'operation' },
-    { title: 'Date', field: 'date' },
-    { title: 'Birth', field: 'birthYear', type: 'numeric' },
-    {
-      title: 'Gender',
-      field: 'gender',
-      lookup: { 0: 'male', 1: 'female' },
-    },
-  ];
-  data = [
-    {
-      name: 'Stav',
-      surname: 'Elmashally',
-      operation: 'Login',
-      date: new Date().toUTCString(),
-      birthYear: 1992,
-      gender: 0,
-    },
-    {
-      name: 'Sara',
-      surname: 'Levi',
-      operation: 'Delete Graph',
-      date: new Date().toUTCString(),
-      birthYear: 1996,
-      gender: 1,
-    },
-  ];
+  state = { data: [], isLoading: true, selectedRow: null };
+
+  onRowClicked = (event, row) => {
+    this.setState({ selectedRow: row.tableData.id });
+  };
+
+  componentDidMount() {
+    // Will be an api call
+    setTimeout(() => {
+      this.setState({ data: API_DATA.data, isLoading: false });
+    }, 1000);
+  }
+
   render() {
     return (
-      <div style={{ maxWidth: '100%' }}>
+      <div className="ui container">
         <MaterialTable
-          columns={this.columns}
-          data={this.data}
-          options={{ search: true }}
-          title="History"
+          title="היסטוריית פעילות"
+          columns={tableConfig.columns}
+          data={this.state.data}
+          onRowClick={this.onRowClicked}
+          options={tableConfig.tableOptions}
+          isLoading={this.state.isLoading}
         />
       </div>
     );

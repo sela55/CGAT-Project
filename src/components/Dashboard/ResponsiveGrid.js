@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo ,useState} from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import Chart from "./Charts";
 import options from "../../options";
@@ -8,6 +8,10 @@ function ResponsiveGrid(props) {
 
   // Create array of refs for each chart
   const chartRef = useMemo(() => options.map((_i) => React.createRef()), []);
+  
+ 
+  
+
 
   function onResizeStop(event, id) {
     const chartId = id.i.slice(-1);
@@ -17,6 +21,7 @@ function ResponsiveGrid(props) {
       window.dispatchEvent(new Event("resize"));
     });
   }
+  
 
 
   function onResize(event, id) {}
@@ -28,7 +33,8 @@ function ResponsiveGrid(props) {
       className="layout"
       
     >
-      {options.map((MappedChart) => (
+      {
+      options.map((MappedChart,index) => (
         <div
           data-grid={{ x: 0, y: 0, w: 3, h: 3 }}
           key={"chart-" + MappedChart.id}
@@ -43,6 +49,7 @@ function ResponsiveGrid(props) {
           />
         </div>
       ))}
+      
     </ResponsiveGridLayout>
   );
 }

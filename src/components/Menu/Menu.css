@@ -1,0 +1,138 @@
+.drawer_button{
+    padding:0;
+    box-sizing: border-box;
+    justify-content:space-around;
+    display: flex;
+    flex-direction: column;
+    height:25px;
+    width: 35px;
+    background: transparent;
+    border:none;
+    cursor: pointer;
+}
+.drawer_button:focus{
+    outline: none;
+}
+
+.drawer_button_line{
+    width: 30px;
+    height:2px;
+    background: white;
+}
+
+.nav_drawer li{
+    margin:25px 5px;
+    font-size: 25px;
+}
+.nav_drawer li:hover{
+    cursor: pointer;
+    color: white;
+    background-color: rgba(12, 108, 241, 0.2); 
+    transition: 0.5s ease-out;
+}
+.nav_drawer ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+
+.nav_drawer a{
+    color: rgb(226, 43, 43);
+    /* text-decoration: none; */
+    font-size: 20px;
+}
+
+.nav_drawer a:hover,
+.nav_drawer a:active{
+    color: rgba(0,0,0,0.5);
+  
+}
+.nav_drawer{
+    /* padding: 1px; */
+    /* margin-top: 3px; */
+    position: fixed;
+    height: 100%;
+    background-color: #95adcf;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+    right: 0;
+    top: 0;
+    width:350px;
+    z-index: 10;
+    
+    direction: rtl;
+    transform: translate(100%);
+    transition: transform 1s ease-out;
+}
+
+.nav_drawer.open{
+    /* left: 0; */
+    right: 0;
+    transform: translateX(0%);
+}
+
+
+
+.Menu{
+    width: 100%;
+    background-color: #cad6e7;
+    height: 50px;
+    direction: rtl;
+}
+.Menu_Nav{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 5px 5px 5px 5px;
+}
+
+.Menu_Space{
+    flex:1;
+}
+.Menu_Logo{
+    margin-left: 10px;
+    height: 50px;
+    width: 80px;
+    /* flex-wrap: wrap; */
+ 
+}
+.Menu_Logo img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.Menu_Logo a{
+    color: white;
+    font-size: 2rem;
+}
+
+.Menu_Item a{
+    color:white;
+
+}
+
+.Menu_Item a:hover{
+    color:black;
+}
+
+.Menu_Item ul{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    display: flex;
+    float:left;
+}
+
+
+.Menu_Item li{
+    margin:0;
+    padding:0 5px;
+}
+
+.backdrop{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 5;
+}
