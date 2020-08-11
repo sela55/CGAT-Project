@@ -1,16 +1,14 @@
-import React from "react";
-import ResponsiveGrid from "./components/Dashboard/ResponsiveGrid";
-import "../node_modules/react-grid-layout/css/styles.css";
-import "../node_modules/react-resizable/css/styles.css";
-
+import React from 'react';
+import ResponsiveGrid from './components/Dashboard/ResponsiveGrid';
+import '../node_modules/react-grid-layout/css/styles.css';
+import '../node_modules/react-resizable/css/styles.css';
 
 function App() {
   return (
-    <div style={{height: '100vh'}}>
-
-  <ResponsiveGrid></ResponsiveGrid>
-  </div>
-    )
+    <div style={{ height: '100vh' }}>
+      <ResponsiveGrid />
+    </div>
+  );
 }
 
 export default App;
