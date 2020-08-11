@@ -5,25 +5,28 @@ const options = [
         type: "area",
       },
       credits: false,
-  
+      legend: {
+        enabled: true
+    },
       title: {
         text: "בדיקות שהתבצעו אתמול",
-        style: {
-          color: "black",
-        },
+        // style: {
+        //   color: "red",
+        //   fontSize:"25px",
+        // },
       },
       series: [
         {
-          name: "יפית",
-          data: [5, 3, 4, 7, 2],
+          name: "1",
+          data: [50, 30, 40, 70, 20],
         },
         {
-          name: "הדר",
-          data: [2, -2, -3, 2, 1],
+          name: "2",
+          data: [20, -20, -30, 20, 10],
         },
         {
-          name: "רביד",
-          data: [3, 4, 4, -2, 5],
+          name: "3",
+          data: [30, 40, 40, -20, 50],
         },
       ],
       xAxis: {
@@ -33,8 +36,38 @@ const options = [
             color: "black",
           },
         },
+       
       },
     },
+    // {
+    //   id: 0,
+    //   chart: {
+    //     type: "area",
+    //   },
+    //   legend: {
+    //     enabled: true
+    // },
+    //   title: {
+    //     text: "בדיקות שהתבצעו אתמול",
+    //   },
+    //   series: [
+    //     {
+    //       name: "1",
+    //       data: [50, 30, 40, 70, 20],
+    //     },
+    //     {
+    //       name: "2",
+    //       data: [20, -20, -30, 20, 10],
+    //     },
+    //     {
+    //       name: "3",
+    //       data: [30, 40, 40, -20, 50],
+    //     },
+    //   ],
+    //   xAxis: {
+    //     categories: ["מורים", "אנשי ניקיון", "הנהלה", "תלמידים", "הורים מבקרים"],
+    //   },
+    // },
   
     {
       id: 1,
@@ -43,24 +76,26 @@ const options = [
       },
       title: {
         text: "החלימו עד כה",
-        style: {
-          color: "black",
-        },
+
       },
       series: [
         {
-          name: "יפית",
+          name: "1",
           data: [5, 3, 4, 7, 2],
         },
         {
-          name: "הדר",
+          name: "2",
           data: [2, -2, -3, 2, 1],
         },
         {
-          name: "רביד",
+          name: "3",
           data: [3, 4, 4, -2, 5],
         },
       ],
+      legend:{
+        // display:true,
+        position:'right'
+      },
       xAxis: {
         categories: ["מורים", "אנשי ניקיון", "הנהלה", "תלמידים", "הורים מבקרים"],
         labels: {
@@ -251,7 +286,134 @@ const options = [
         },
       ],
     },
+    {
+      id:3,
+      chart: {
+        type: 'line'
+    },
+    credits:{
+        enabled:false,
+    },
+    title: {
+        style:{
+            color:'black'            
+        },
+        text: 'מדד מחזור העסקים באיו"ש וברצ"ע',
+    },
+    subtitle: {
+        text: 'מדד מחזור העסקים החודשי, מרץ 2018 עד מרץ 2020',
+    },
+    xAxis: {
+        categories: ['מרץ','אפריל', 'מאי','יוני','יולי','אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר', 'ינואר','פברואר', 'מרץ', 'אפריל', 'יוני', 'יולי'],
+        labels:{
+          enabled:true,
+            style:{
+                color:'black'
+            }
+        }, 
+    },
+    yAxis: {
+      labels:{
+        style:{
+            color:'black',
+            fontSize:'25px',
+        }
+    },       
+        title: {
+            style:{
+                color:'black',
+                fontSize:"20px",                        
+            },
+            text: 'Temperature (°C)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        }
+     
+    },
+    series: [{
+        name: 'רצ״ע',
+        data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+    }, {
+        name: 'איו״ש',
+        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+    }]
+     },
+
+     {
+       id: 4,
+      chart: {
+        type: 'pie',
+    },
+    credits:{
+        enabled:false,
+        
+    },
+    legend:{
+      enabled: true
+    },
+    title: {
+        style:{
+            color:'black'            
+        },
+        text: 'Countries compared by population density and total area.'
+    },
+    tooltip: {
+        headerFormat: '',
+        pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
+            'Area (square km): <b>{point.y}</b><br/>' +
+            'Population density (people per square km): <b>{point.z}</b><br/>'
+    },
+    plotOptions:{
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+            enabled: false
+        },
+        showInLegend: true
+    },
+    },
+    series: [{
+        minPointSize: 10,
+        innerSize: '20%',
+        zMin: 0,
+        name: 'countries',
+        data: [{
+            name: 'Spain',
+             y: 505370,
+            color:'red'
+        }, {
+            name: 'France',
+            y: 551500,
+        }, {
+            name: 'Poland',
+            y: 312685,
+        }, {
+            name: 'Czech Republic',
+            y: 78867,
+        }, {
+            name: 'Italy',
+            y: 301340,
+        }, {
+            name: 'Switzerland',
+            y: 41277,
+        }, {
+            name: 'Germany',
+            y: 357022,
+        }]
+    }]
+     },
+
   ];
   
+
+
+
   export default options;
   
