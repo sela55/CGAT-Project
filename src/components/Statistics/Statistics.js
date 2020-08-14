@@ -1,7 +1,8 @@
 import React from 'react';
 import MaterialTable from 'material-table';
+import { API_DATA } from './data';
+import api from '../../api/api';
 import './Statistics.css';
-import { API_DATA } from './api';
 
 const tableConfig = {
   columns: [
@@ -35,6 +36,7 @@ class Statistics extends React.Component {
     setTimeout(() => {
       this.setState({ data: API_DATA.data, isLoading: false });
     }, 1000);
+    api.get('/').then(response => console.log(response.data));
   }
 
   render() {
