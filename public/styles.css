@@ -1,0 +1,17 @@
+*{
+    margin:0;
+    padding:0;
+  }
+  
+  .highchartsWrapper > div {
+    height: 100%;
+  }
+  
+  .chartWrap > div {
+    height: 100%;
+    border-radius:8%;
+  }
+  
+.layout{
+    background-color: rgb(237,241,247);
+  }

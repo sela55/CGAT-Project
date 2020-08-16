@@ -1,0 +1,33 @@
+drop table if exists "usersPriviledgesTable";
+drop table if exists "eventsTable";
+drop table if exists "usersInfoTable";
+create table "usersInfoTable" ("שם משתמש" text NOT NULL UNIQUE,
+								"סיסמא" text NOT NULL,
+								"תעודת זהות" text NOT NULL PRIMARY KEY UNIQUE,
+								"שם פרטי" text NOT NULL,
+								"שם משפחה" text NOT NULL,
+								"כתובת" text,
+								"תאריך לידה" text NOT NULL,
+								"סוג הרשאה" text NOT NULL,
+								"תפקיד" text NOT NULL,
+								"ארגון" text);
+
+create table "usersPriviledgesTable" ("שם משתמש" text NOT NULL,
+								"צופה" boolean NOT NULL,
+								"עורך" boolean NOT NULL,
+								"הדפסת גרף" boolean NOT NULL,
+								"הורדת תצוגה PDF" boolean NOT NULL,
+								"הורדת תצוגה תמונה" boolean NOT NULL,
+								"הורדה לקובץ CSV" boolean NOT NULL,
+								"הורדה לקובץ XLSX" boolean NOT NULL,
+								"הצגת טבלת נתונים" boolean NOT NULL,
+								CONSTRAINT fk_id FOREIGN KEY("שם משתמש") 
+  								REFERENCES "usersInfoTable"("שם משתמש"));
+
+
+create table "eventsTable" ("שם משתמש" text NOT NULL,
+								"פעולה" text NOT NULL,
+								"תאריך" text NOT NULL,
+								CONSTRAINT fk_username FOREIGN KEY("שם משתמש") 
+  								REFERENCES "usersInfoTable"("שם משתמש"));
+
