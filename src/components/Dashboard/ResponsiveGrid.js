@@ -1,62 +1,65 @@
-import React, { useMemo ,useState} from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import Chart from "./Charts";
-import options from "../../options";
+import HighchartsOptions from "./HighchartsOptions";
 import Highcharts from "highcharts";
-
 require("highcharts/modules/exporting")(Highcharts);
 
-var buttons = Highcharts.getOptions().exporting.buttons.contextButton.menuItems;
+const defaultContextMenuButtons = Highcharts.getOptions().exporting.buttons.contextButton.menuItems;
 
-function ResponsiveGrid(props) {
+function ResponsiveGrid() {
+  const chartRef = useMemo(() => HighchartsOptions.map((_i) => React.createRef()), []); // Create array of refs for each chart
   const ResponsiveGridLayout = WidthProvider(Responsive);
+  const [highChartsOptions, setHighChartsOptions] = useState(HighchartsOptions);
 
-  // Create array of refs for each chart
-  const chartRef = useMemo(() => options.map((_i) => React.createRef()), []);
-  
- 
-  
-
-
-  function onResizeStop(event, id) {
-    const chartId = id.i.slice(-1);
-    chartRef[chartId].current.chart.reflow();
-
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
+  const deleteChart = useCallback((id) => {
+    setHighChartsOptions((prevCharts) => {
+      return prevCharts.filter((chart, index) => {
+        return index !== id;
+      });
     });
-  }
+  }, []);
 
-buttons.push({
-  text:"Delete"
-})
-
-  function onResize(event, id) {}
+  const onResizeStop = useCallback(
+    (event, id) => {
+      const chartId = id.i.slice(-1);
+      chartRef[chartId].current.chart.reflow();
+      setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+      });
+    },
+    [chartRef]
+  );
 
   return (
-    <ResponsiveGridLayout
-      onResize={onResize}
-      onResizeStop={onResizeStop}
-      className="layout"
-      
-    >
-      {
-      options.map((MappedChart,index) => (
-        <div
-          data-grid={{ x: 0, y: 0, w: 3, h: 3 }}
-          key={"chart-" + MappedChart.id}
-          className="chartWrap"
-        >
+    <ResponsiveGridLayout onResizeStop={onResizeStop} className="layout" compactType="horizontal">
+      {highChartsOptions.map((MappedChart, index) => (
+        <div data-grid={{ x: 0, y: 0, w: 3, h: 3 }} key={"chart-" + MappedChart.id} className="chartWrap">
           <Chart
             ref={chartRef[MappedChart.id]}
             className="chart"
             id={"chart-" + MappedChart.id}
-            options={MappedChart}
-            
+            options={{
+              ...MappedChart,
+              exporting: {
+                buttons: {
+                  contextButton: {
+                    menuItems: [
+                      {
+                        text: "Delete",
+                        onclick: () => {
+                          deleteChart(MappedChart.id);
+                        },
+                      },
+                      ...defaultContextMenuButtons,
+                    ],
+                  },
+                },
+              },
+            }}
           />
         </div>
       ))}
-      
     </ResponsiveGridLayout>
   );
 }
