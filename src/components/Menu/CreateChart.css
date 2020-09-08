@@ -1,0 +1,72 @@
+.CreateChart li {
+  /* margin:5px; */
+  padding: 5px;
+  float: left;
+  font-size: large;
+}
+
+.CreateChart ul {
+  list-style: none;
+}
+
+.chartWrapDemo {
+  width: 700px;
+  /* max-width: 500px; */
+  position: relative;
+  left: 30%;
+}
+
+.column {
+  float: right;
+  display: inline-flex;
+  padding: 5px;
+  margin: 5px;
+  height: 480px;
+  width: 400px;
+}
+
+.title {
+  float: right;
+  margin-right: 10px;
+}
+
+.buttonDesign {
+  width: 100%;
+}
+
+.title span {
+  float: right;
+  margin: 5px;
+}
+.title input {
+  direction: RTL;
+  width: 50%;
+  border: 2px solid black;
+  border-radius: 4px;
+  float: right;
+  height: 30px;
+}
+.title Button {
+  float: left;
+}
+
+.sendDataBtn {
+  background-color: green;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 80px;
+  width: 80px;
+}
+
+.vl {
+  border-left: 1px solid #9a9a9a;
+  height: 400px;
+  width: 10px;
+  float: right;
+}
+
+.titleButton {
+  background-color: blue;
+  float: left;
+}
