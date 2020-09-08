@@ -1,16 +1,17 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import MaterialTable from 'material-table';
+import { API_DATA } from './data';
+import api from '../../api/api';
+import './Statistics.css';
 
 const tableConfig = {
   columns: [
-    { title: 'שם', field: 'שם' },
-    { title: 'סוג הרשאה', field: 'סוג הרשאה' },
-    { title: 'תפקיד', field: 'תפקיד' },
-    { title: 'פעולה', field: 'פעולה' },
-    { title: 'תאריך', field: 'תאריך' },
-    { title: 'ארגון', field: 'ארגון' },
+    { title: 'שם משתמש', field: 'userName' },
+    { title: 'הרשאות', field: 'permissions' },
+    { title: 'פעולה שביצע', field: 'operation' },
+    { title: 'ארגון', field: 'organization' },
+    { title: 'תפקיד', field: 'role' },
+    { title: 'תאריך', field: 'date' },
   ],
   tableOptions: {
     search: true,
@@ -23,34 +24,35 @@ const tableConfig = {
   },
 };
 
-const Statistics = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedRow, setSelectedRow] = useState(null);
+class Statistics extends React.Component {
+  state = { data: [], isLoading: true, selectedRow: null };
 
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get('/api/statistics');
-      setData(response.data);
-      console.log(response.data);
-      setLoading(false);
-    })();
-  }, []);
+  onRowClicked = (event, row) => {
+    this.setState({ selectedRow: row.tableData.id });
+  };
 
-  return (
-    <div>
-      <MaterialTable
-        title="היסטוריית פעילות"
-        columns={tableConfig.columns}
-        data={data}
-        options={tableConfig.tableOptions}
-        isLoading={loading}
-        onRowClick={(event, row) => {
-          setSelectedRow({ selectedRow: row.tableData.id });
-        }}
-      />
-    </div>
-  );
-};
+  componentDidMount() {
+    // Will be an api call
+    setTimeout(() => {
+      this.setState({ data: API_DATA.data, isLoading: false });
+    }, 1000);
+    api.get('/').then(response => console.log(response.data));
+  }
+
+  render() {
+    return (
+      <div className="ui container">
+        <MaterialTable
+          title="היסטוריית פעילות"
+          columns={tableConfig.columns}
+          data={this.state.data}
+          onRowClick={this.onRowClicked}
+          options={tableConfig.tableOptions}
+          isLoading={this.state.isLoading}
+        />
+      </div>
+    );
+  }
+}
 
 export default Statistics;
